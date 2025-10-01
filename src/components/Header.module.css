@@ -1,0 +1,47 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #fff;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #1f2937;
+    letter-spacing: -0.02em;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coinIcon {
+    background: #fbbf24;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    border: 2px solid #ffee56;
+    color: #fffa63;
+}
+
+.flameIcon {
+    background: #3b82f6;
+    border: 2px solid #5897fc;
+    fill: #fff;
+    padding: 2px;
+}

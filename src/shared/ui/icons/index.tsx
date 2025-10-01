@@ -4,3 +4,4 @@ export { default as ShopIcon } from './shop.svg?react';
 export { default as ChartIcon } from './chart.svg?react';
 export { default as PenIcon } from './pen.svg?react';
 export { default as MapIcon } from './map.svg?react';
+export { default as FlameIcon } from './flame.svg?react';
