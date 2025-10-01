@@ -1,46 +1,20 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { BottomNavbar } from './BottomNavbar';
 import styles from './Layout.module.css';
+import clsx from 'clsx';
 
-export const Layout = () => {
-  const location = useLocation();
+interface LayoutProps {
+    hideNavBar?: boolean;
+    bgClass?: 'default';
+}
 
-  return (
-    <div className={styles.layout}>
-      <nav className={styles.nav}>
-        <Link
-          to="/"
-          className={`${styles.navLink} ${location.pathname === '/' ? styles.active : ''}`}
-        >
-          Главное меню
-        </Link>
-        <Link
-          to="/rating"
-          className={`${styles.navLink} ${location.pathname === '/rating' ? styles.active : ''}`}
-        >
-          Рейтинг
-        </Link>
-        <Link
-          to="/lectures"
-          className={`${styles.navLink} ${location.pathname.startsWith('/lectures') ? styles.active : ''}`}
-        >
-          Лекции
-        </Link>
-        <Link
-          to="/worlds"
-          className={`${styles.navLink} ${location.pathname.startsWith('/worlds') ? styles.active : ''}`}
-        >
-          Миры
-        </Link>
-        <Link
-          to="/shop"
-          className={`${styles.navLink} ${location.pathname === '/shop' ? styles.active : ''}`}
-        >
-          Магазин
-        </Link>
-      </nav>
-      <main className={styles.main}>
-        <Outlet />
-      </main>
-    </div>
-  );
+export const Layout = ({ hideNavBar, bgClass = 'default' }: LayoutProps) => {
+    return (
+        <div className={clsx(styles.layout, styles[`bg-${bgClass}`])}>
+            <main className={styles.main}>
+                <Outlet />
+            </main>
+            {!hideNavBar && <BottomNavbar />}
+        </div>
+    );
 };

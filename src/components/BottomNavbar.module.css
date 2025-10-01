@@ -1,0 +1,57 @@
+.navbar {
+  position: fixed;
+  bottom: 16px;
+  left: 32px;
+  right: 32px;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 24px;
+  z-index: 1000;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.navItem:hover {
+  color: #3b82f6;
+  cursor: pointer;
+}
+
+.navItem:active {
+  color: #3b82f6;
+  transform: scale(1.1);
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  fill: #3b82f6;
+}
+
+.icon.home {
+  width: 48px;
+  height: 48px;
+  transform: scale(1.3);
+  border-radius: 50%;
+  border: 1px solid #fff;
+}
+
+.navItem:hover .icon {
+  color: #3b82f6;
+}
+
+.navItem.active .icon {
+  color: #3b82f6;
+}

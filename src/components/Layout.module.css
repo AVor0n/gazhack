@@ -4,32 +4,14 @@
   flex-direction: column;
 }
 
-.nav {
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
-  background-color: #f8f9fa;
-}
-
-.navLink {
-  margin-right: 1rem;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.navLink:hover {
-  background-color: #e9ecef;
-}
-
-.navLink.active {
-  background-color: #007bff;
-  color: white;
-}
-
 .main {
   flex: 1;
-  padding: 1rem;
+  padding-bottom: 80px;
+}
+
+.bg-default {
+  background-image: url('/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
