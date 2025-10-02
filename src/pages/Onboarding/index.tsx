@@ -7,45 +7,56 @@ interface OnboardingStep {
   message: string;
   highlightElement?: string;
   highlightPosition?: { top: number; left: number; width: number; height: number };
+  fullScreenImage?: string;
 }
 
 const onboardingSteps: OnboardingStep[] = [
   {
     id: 1,
-    message: "Привет! Меня зовут Миша! Я - финансовый аналитик Газпромбанка. Давайте изучим интерфейс!",
+    message: "",
+    fullScreenImage: "/intro-1.png"
   },
   {
     id: 2,
+    message: "",
+    fullScreenImage: "/intro-2.png"
+  },
+  {
+    id: 3,
+    message: "Привет! Меня зовут Миша! Я - финансовый аналитик Газпромбанка. Давайте изучим интерфейс!",
+  },
+  {
+    id: 4,
     message: "Здесь отображается ваша валюта - монеты, которые вы зарабатываете за прохождение уроков!",
     highlightElement: 'coins',
   },
   {
-    id: 3,
+    id: 5,
     message: "А это ваш стрик - количество дней подряд, когда вы изучали финансы!",
     highlightElement: 'streak',
   },
   {
-    id: 4,
+    id: 6,
     message: "В разделе 'Лекции' вы найдете обучающие материалы по финансовой грамотности!",
     highlightElement: 'lectures',
   },
   {
-    id: 5,
+    id: 7,
     message: "В 'Мирах' вас ждут игровые уровни для практического изучения финансов!",
     highlightElement: 'worlds',
   },
   {
-    id: 6,
+    id: 8,
     message: "В 'Магазине' можно потратить заработанные монеты на улучшения!",
     highlightElement: 'shop',
   },
   {
-    id: 7,
+    id: 9,
     message: "А в 'Рейтинге' посмотреть, как вы сравниваетесь с другими игроками!",
     highlightElement: 'rating',
   },
   {
-    id: 8,
+    id: 10,
     message: "Отлично! Теперь вы знаете основы интерфейса. Удачи в изучении финансов!",
   }
 ];
@@ -57,6 +68,7 @@ export const Onboarding: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isBearDisappearing, setIsBearDisappearing] = useState(false);
+  const [isBearAppearing, setIsBearAppearing] = useState(false);
   const [highlightPosition, setHighlightPosition] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
   const navigate = useNavigate();
   const currentData = onboardingSteps[currentStep];
@@ -106,11 +118,17 @@ export const Onboarding: React.FC = () => {
     if (isAnimating) return; // Предотвращаем клики во время анимации
 
     if (currentStep < onboardingSteps.length - 1) {
-      setIsAnimating(true);
-      setTimeout(() => {
+      // Для полноэкранных изображений - мгновенный переход
+      if (currentData.fullScreenImage) {
         setCurrentStep(currentStep + 1);
-        setIsAnimating(false);
-      }, 300); // Время анимации переключения пузыря
+      } else {
+        // Для обычных шагов - с анимацией
+        setIsAnimating(true);
+        setTimeout(() => {
+          setCurrentStep(currentStep + 1);
+          setIsAnimating(false);
+        }, 300);
+      }
     } else {
       handleComplete();
     }
@@ -135,81 +153,126 @@ export const Onboarding: React.FC = () => {
 
   return (
     <>
-      {/* Bear Layer - выше навбара, но ниже подсветки */}
-      <div
-        style={{
-          position: 'fixed',
-          left: '30%',
-          bottom: '8%',
-          pointerEvents: 'auto',
-          opacity: isBearDisappearing ? 0 : 1,
-          transform: 'scale(3.5)',
-          transition: 'all 0.5s ease'
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <img
-          src="/bear.png"
-          alt="Миша - финансовый аналитик"
-          className={styles.bear}
-        />
-      </div>
-
-      {/* Main Onboarding Layer - средний z-index */}
-      <div
-        onClick={handleScreenClick}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 1000,
-          pointerEvents: 'auto',
-          cursor: 'pointer',
-          WebkitTapHighlightColor: 'transparent',
-          WebkitTouchCallout: 'none',
-          WebkitUserSelect: 'none',
-          MozUserSelect: 'none',
-          msUserSelect: 'none',
-          userSelect: 'none',
-          outline: 'none'
-        }}
-      >
-        {/* Highlight overlay */}
-        {highlightPosition && (
-          <div
-            className={styles.highlight}
+      {/* Full Screen Image for intro steps */}
+      {currentData.fullScreenImage && (
+        <div
+          onClick={handleScreenClick}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 10000,
+            cursor: 'pointer',
+            backgroundColor: '#000000',
+            WebkitTapHighlightColor: 'transparent',
+            WebkitTouchCallout: 'none',
+            WebkitUserSelect: 'none',
+            MozUserSelect: 'none',
+            msUserSelect: 'none',
+            userSelect: 'none',
+            outline: 'none'
+          }}
+        >
+          <img
+            src={currentData.fullScreenImage}
+            alt="Intro"
             style={{
-              top: highlightPosition.top - offset,
-              left: highlightPosition.left - offset,
-              width: highlightPosition.width + offset * 2,
-              height: highlightPosition.height + offset * 2,
-              opacity: isAnimating ? 0 : 1,
-              transition: 'opacity 0.3s ease',
-              background: 'rgba(239, 68, 68, 0.15)',
-              border: '3px solid #ef4444',
-              borderRadius: '12px',
-              boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)'
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              display: 'block'
             }}
           />
-        )}
+        </div>
+      )}
 
-        {/* Speech Bubble */}
+      {/* Bear Layer - выше навбара, но ниже подсветки */}
+      {!currentData.fullScreenImage && (
         <div
-          className={styles.speechBubble}
           style={{
-            opacity: isAnimating ? 0 : 1,
-            transform: isAnimating ? 'translateX(25%) scale(0.8)' : 'translateX(25%) scale(1)',
-            transition: 'all 0.3s ease'
+            position: 'fixed',
+            left: '30%',
+            bottom: '8%',
+            pointerEvents: 'auto',
+            opacity: isBearDisappearing ? 0 : (isBearAppearing ? 0 : 1),
+            transform: isBearAppearing
+              ? 'scale(3.5) translateY(50px)'
+              : isBearDisappearing
+                ? 'scale(2.5)'
+                : 'scale(3.5)',
+            transition: isBearAppearing ? 'all 0.8s ease' : 'all 0.5s ease'
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className={styles.speechText}>
-            {currentData.message}
-          </div>
+          <img
+            src="/bear.png"
+            alt="Миша - финансовый аналитик"
+            className={styles.bear}
+          />
         </div>
-      </div>
+      )}
+
+      {/* Main Onboarding Layer - средний z-index */}
+      {!currentData.fullScreenImage && (
+        <div
+          onClick={handleScreenClick}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 1000,
+            pointerEvents: 'auto',
+            cursor: 'pointer',
+            WebkitTapHighlightColor: 'transparent',
+            WebkitTouchCallout: 'none',
+            WebkitUserSelect: 'none',
+            MozUserSelect: 'none',
+            msUserSelect: 'none',
+            userSelect: 'none',
+            outline: 'none'
+          }}
+        >
+          {/* Highlight overlay */}
+          {highlightPosition && (
+            <div
+              className={styles.highlight}
+              style={{
+                top: highlightPosition.top - offset,
+                left: highlightPosition.left - offset,
+                width: highlightPosition.width + offset * 2,
+                height: highlightPosition.height + offset * 2,
+                opacity: isAnimating ? 0 : 1,
+                transition: 'opacity 0.3s ease',
+                background: 'rgba(239, 68, 68, 0.15)',
+                border: '3px solid #ef4444',
+                borderRadius: '12px',
+                boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)'
+              }}
+            />
+          )}
+
+          {/* Speech Bubble */}
+          {currentData.message && (
+            <div
+              className={styles.speechBubble}
+              style={{
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? 'translateX(25%) scale(0.8)' : 'translateX(25%) scale(1)',
+                transition: 'all 0.3s ease'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={styles.speechText}>
+                {currentData.message}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 };
