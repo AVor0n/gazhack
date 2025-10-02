@@ -42,7 +42,7 @@ const worldNames: Record<string, string> = {
 const worldMapImages: Record<string, string> = {
     novice: '/worlds/map-1.png',
     profi: '/worlds/map-2.png',
-    expert: '/worlds/map-3.png'
+    expert: '/worlds/map-4.jpeg'
 };
 
 export const LevelMap: React.FC = () => {

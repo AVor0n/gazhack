@@ -31,7 +31,7 @@ const worlds: World[] = [
     {
         id: 'expert',
         name: 'ЭКСПЕРТ',
-        image: '/worlds/world-3.png',
+        image: '/worlds/world-4.jpeg',
         description: 'Экспертный уровень инвестиций',
         unlocked: true,
         position: { x: 30, y: 25 },
