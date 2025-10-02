@@ -34,7 +34,7 @@ export const App = () => {
               <Route path="lectures/:id" element={<Lecture />} />
               <Route path="worlds" element={<WorldMap />} />
               <Route path="worlds/:worldId" element={<LevelMap />} />
-              <Route path="worlds/:worldId/:levelId" element={<Level />} />
+              <Route path="worlds/:worldId/levels/:levelId" element={<Level />} />
               <Route path="shop" element={<Shop />} />
             </Route>
           </Routes>
