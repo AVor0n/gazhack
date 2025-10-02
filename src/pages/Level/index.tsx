@@ -5,7 +5,7 @@ export const Level: React.FC = () => {
   const { worldId, levelId } = useParams<{ worldId: string; levelId: string }>();
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Уровень {levelId} мира {worldId}</h1>
       <p>Игровой уровень</p>
     </div>

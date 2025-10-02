@@ -33,3 +33,30 @@ button {
     background: none;
     cursor: pointer;
 }
+
+/* Page titles */
+h1 {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    padding: 0 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+p {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0;
+    padding: 0 20px;
+    line-height: 1.4;
+}
+
+/* Page containers */
+.page-container {
+    padding: 20px;
+    min-height: calc(100vh - 140px); /* Учитываем высоту header и navbar */
+}
