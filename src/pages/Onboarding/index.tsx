@@ -8,6 +8,7 @@ interface OnboardingStep {
   highlightElement?: string;
   highlightPosition?: { top: number; left: number; width: number; height: number };
   fullScreenImage?: string;
+  bearImage?: string;
 }
 
 const onboardingSteps: OnboardingStep[] = [
@@ -24,40 +25,48 @@ const onboardingSteps: OnboardingStep[] = [
   {
     id: 3,
     message: "Привет! Меня зовут Миша! Я - финансовый аналитик Газпромбанка. Давайте изучим интерфейс!",
+    bearImage: "/bear-1.png",
   },
   {
     id: 4,
     message: "Здесь отображается ваша валюта - монеты, которые вы зарабатываете за прохождение уроков!",
     highlightElement: 'coins',
+    bearImage: "/bear-3.png",
   },
   {
     id: 5,
     message: "А это ваш стрик - количество дней подряд, когда вы изучали финансы!",
     highlightElement: 'streak',
+    bearImage: "/bear-4.png",
   },
   {
     id: 6,
     message: "В разделе 'Лекции' вы найдете обучающие материалы по финансовой грамотности!",
     highlightElement: 'lectures',
+    bearImage: "/bear-3.png",
   },
   {
     id: 7,
     message: "В 'Мирах' вас ждут игровые уровни для практического изучения финансов!",
     highlightElement: 'worlds',
+    bearImage: "/bear-2.png",
   },
   {
     id: 8,
     message: "В 'Магазине' можно потратить заработанные монеты на улучшения!",
     highlightElement: 'shop',
+    bearImage: "/bear-4.png",
   },
   {
     id: 9,
     message: "А в 'Рейтинге' посмотреть, как вы сравниваетесь с другими игроками!",
     highlightElement: 'rating',
+    bearImage: "/bear-2.png",
   },
   {
     id: 10,
     message: "Отлично! Теперь вы знаете основы интерфейса. Удачи в изучении финансов!",
+    bearImage: "/bear-1.png",
   }
 ];
 
@@ -207,7 +216,7 @@ export const Onboarding: React.FC = () => {
           onClick={(e) => e.stopPropagation()}
         >
           <img
-            src="/bear.png"
+            src={currentData.bearImage}
             alt="Миша - финансовый аналитик"
             className={styles.bear}
           />
