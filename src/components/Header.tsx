@@ -10,12 +10,12 @@ interface HeaderProps {
 export const Header = ({ coins, streak }: HeaderProps) => {
     return (
         <header className={styles.header}>
-            <div className={styles.item}>
+            <div className={styles.item} data-onboarding="coins">
                 <div className={clsx(styles.icon, styles.coinIcon)}>G</div>
                 <span>{coins}</span>
             </div>
 
-            <div className={styles.item}>
+            <div className={styles.item} data-onboarding="streak">
                 <span>{streak}</span>
                 <FlameIcon className={clsx(styles.icon, styles.flameIcon)} />
             </div>

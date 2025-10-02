@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { BottomNavbar } from './BottomNavbar';
 import { Header } from './Header';
+import { Onboarding } from '../pages/Onboarding';
 import styles from './Layout.module.css';
 import clsx from 'clsx';
 
@@ -17,6 +18,7 @@ export const Layout = ({ hideNavBar, bgClass = 'default' }: LayoutProps) => {
                 <Outlet />
             </main>
             {!hideNavBar && <BottomNavbar />}
+            <Onboarding />
         </div>
     );
 };

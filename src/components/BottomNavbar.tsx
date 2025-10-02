@@ -8,20 +8,21 @@ interface NavItem {
     path: string;
     Icon: FC<SVGProps<SVGSVGElement>>;
     end?: boolean;
+    onboardingId?: string;
 }
 
 export const BottomNavbar: React.FC = () => {
     const navItems: NavItem[] = [
-        { path: '/shop', Icon: ShopIcon, end: true },
-        { path: '/worlds', Icon: MapIcon, end: false },
+        { path: '/shop', Icon: ShopIcon, end: true, onboardingId: 'shop' },
+        { path: '/worlds', Icon: MapIcon, end: false, onboardingId: 'worlds' },
         { path: '/', Icon: LogoIcon, end: true },
-        { path: '/lectures', Icon: BookIcon, end: false },
-        { path: '/rating', Icon: ChartIcon, end: true },
+        { path: '/lectures', Icon: BookIcon, end: false, onboardingId: 'lectures' },
+        { path: '/rating', Icon: ChartIcon, end: true, onboardingId: 'rating' },
     ];
 
     return (
         <nav className={styles.navbar}>
-            {navItems.map(({ path, Icon, end }) => {
+            {navItems.map(({ path, Icon, end, onboardingId }) => {
                 return (
                     <NavLink
                         key={path}
@@ -30,6 +31,7 @@ export const BottomNavbar: React.FC = () => {
                         className={({ isActive }) =>
                             clsx(styles.navItem, isActive && styles.active)
                         }
+                        data-onboarding={onboardingId}
                     >
                         <Icon className={clsx(styles.icon, path === '/' && styles.home)} />
                     </NavLink>
