@@ -55,7 +55,7 @@ const onboardingSteps: OnboardingStep[] = [
     id: 8,
     message: "В 'Магазине' можно потратить заработанные монеты на улучшения!",
     highlightElement: 'shop',
-    bearImage: "/bear-4.png",
+    bearImage: "/bear-5.png",
   },
   {
     id: 9,
